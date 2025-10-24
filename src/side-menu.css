@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a:hover{
+    background-color: #E6EEFF;
+    color: #1D4ED8;
+}
+.side_menu{
+    color: #222B45;
+}
+.side_menu.active{
+    background-color: #E6EEFF;
+    color: #073fda;
+}

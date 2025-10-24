@@ -1,0 +1,10 @@
+/* home.css */
+.checkBox {
+  width: 20px;
+  height: 20px;
+  accent-color: #35e188;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  transition: 0.2s;
+}
