@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { taskContainerStyle } from './home.jsx'
 
+
 const containerStyle = {
   display: "flex",
   flexDirection: "column",
@@ -15,7 +16,9 @@ const styles ={
     fontSize: "15px",
     border: "1px solid grey",
     margin: '20px 0 20px 0',
-    width: "50%"
+    width: "50%",
+    
+    
 }
 const select_style={
     width: "50%",
@@ -38,7 +41,7 @@ const Form = ({addTodo}) =>{
 
  const handleSave = () => {
         if(!title.trim()) return; 
-        const newTask = { title, description, priority, dueDate };
+        const newTask = { title, description, priority, dueDate };   
         addTodo(newTask); 
     }
     return (
@@ -48,15 +51,14 @@ const Form = ({addTodo}) =>{
                 <p style={{fontSize: "18px", color: "#6B7280"}}>Fill in the details below to add a new task to your list.</p>
             </div>
             <div style={{fontSize: "18px", width:"80%",padding: "40px", color: "#374151",gap: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between" , marginLeft: "20px;"}}>
-                <p >Task Title</p>
-                <input style={styles} type="text" value={title} placeholder="e.g., Design the new dashboard" onChange={(e)=>setTitle(e.target.value)}/>
-                <p >Task Description</p>
-                <textarea style={styles} value={description} placeholder="Add a more detailed description of the task..." onChange={(e)=>setDescription(e.target.value)}></textarea>
+                <p >Task Title *</p>
+                <input style={styles} type="text" value={title} placeholder="e.g., Design the new dashboard" onChange={(e)=>setTitle(e.target.value)} required/>
+                <p >Task Description *</p>
+                <textarea style={styles} value={description} placeholder="Add a more detailed description of the task..." onChange={(e)=>setDescription(e.target.value)} required></textarea>
                 <div>
-                    {/* Priority */}
                     <div className="form-group">
-                        <label className="form-label">Priority</label> <br />
-                        <select className="form-select" style={select_style} defaultValue="medium" value={priority} onChange={(e)=>setPriority(e.target.value)}>
+                        <label className="form-label">Priority *</label> <br />
+                        <select className="form-select" style={select_style} defaultValue="medium" value={priority} onChange={(e)=>setPriority(e.target.value)} required>
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
@@ -69,7 +71,9 @@ const Form = ({addTodo}) =>{
                     </div>
                     </div>
                     <div>
-                        <Link to="/"><button style={{width: "140px", backgroundColor:"#3B82F6", marginInline:"20px"}} onClick={handleSave}>Save task</button></Link>
+
+                       <Link to="/"><button style={{width: "140px", backgroundColor: !title || !description || !priority ? '#E5E7EB' : '#3B82F6', marginInline:"20px", cursor: !title || !description || !priority ? 'not-allowed' : 'pointer'}} className="btn-1" onClick={handleSave} disabled={!title || !description || !priority }>Save task</button></Link>
+
                         <Link to="/"><button style={{width: "140px", backgroundColor:"#F3F4F6", color:"#374151", border:"1px solid lightgrey"}}>Cancel</button></Link>
                     </div>
                     

@@ -69,6 +69,16 @@ const Home = ({ todos, completeTodo }) => {
                   }
                 }}
               />
+              <input 
+                type="checkbox" 
+                className="checkBox" 
+                role="switch"
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    completeTodo(index);
+                  }
+                }}
+              />
               {todo.title}
             </h3>
             <p>{todo.description}</p>

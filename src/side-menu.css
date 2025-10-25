@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
 }
-a:hover{
+.side_menu:hover{
     background-color: #E6EEFF;
     color: #1D4ED8;
 }
