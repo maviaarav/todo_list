@@ -41,6 +41,7 @@ const Form = ({addTodo}) =>{
 
  const handleSave = () => {
         if(!title.trim()) return; 
+        if(!description.trim()) return;
         const newTask = { title, description, priority, dueDate };   
         addTodo(newTask); 
     }
@@ -54,7 +55,7 @@ const Form = ({addTodo}) =>{
                 <p >Task Title *</p>
                 <input style={styles} type="text" value={title} placeholder="e.g., Design the new dashboard" onChange={(e)=>setTitle(e.target.value)} required/>
                 <p >Task Description *</p>
-                <textarea style={styles} value={description} placeholder="Add a more detailed description of the task..." onChange={(e)=>setDescription(e.target.value)} required></textarea>
+                <input style={styles} value={description} placeholder="Add a more detailed description of the task..." onChange={(e)=>setDescription(e.target.value)} required></input>
                 <div>
                     <div className="form-group">
                         <label className="form-label">Priority *</label> <br />

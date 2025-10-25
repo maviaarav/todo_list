@@ -35,11 +35,13 @@ const deleteButtonStyle = {
   fontSize: "14px",
   borderRadius: "5px",
   border: "none",
-  backgroundColor: "#ff4d4d",
-  color: "#fff",
-  cursor: "pointer",
+  backgroundColor: "rgb(255, 77, 77)",
+  color: "rgb(255, 255, 255)",
   alignSelf: "flex-start",
+  float: "right",
   display: "block",
+  position: "relative",
+  top: "90px",
 };
 
 const Completed = ({ completedTodos , deleteTodo }) => {
