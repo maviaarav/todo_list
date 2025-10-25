@@ -4,7 +4,7 @@ import Completed from './Completed.jsx'
 import Home from './home.jsx'
 import Form from './form.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const bodyStyle = {
   backgroundColor: "#F5F6F8",
@@ -13,41 +13,51 @@ const bodyStyle = {
 }
 
 function App() {
-  const [todos, setTodos] = useState([])  
-  const [completedTodos, setCompletedTodos] = useState([])
+  const [todos, setTodos] = useState([]);
+  const [completedTodos, setCompletedTodos] = useState([]);
+  const isInitialLoad = useRef(true); 
 
-  // 🧭 Load saved data from localStorage when app starts
+
   useEffect(() => {
-    const savedTodos = localStorage.getItem("todos");
-    const savedCompleted = localStorage.getItem("completedTodos");
+    try {
+      const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+      const savedCompleted = JSON.parse(localStorage.getItem("completedTodos")) || [];
 
-    if (savedTodos) setTodos(JSON.parse(savedTodos));
-    if (savedCompleted) setCompletedTodos(JSON.parse(savedCompleted));
+      console.log("Loaded todos (once):", savedTodos);
+      console.log("Loaded completedTodos (once):", savedCompleted);
+
+      if (Array.isArray(savedTodos)) setTodos(savedTodos);
+      if (Array.isArray(savedCompleted)) setCompletedTodos(savedCompleted);
+    } catch (error) {
+      console.error("Error loading localStorage:", error);
+    }
   }, []);
 
-  // 💾 Save todos whenever they change
   useEffect(() => {
+    if (isInitialLoad.current) return;
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  // 💾 Save completedTodos whenever they change
+
   useEffect(() => {
+    if (isInitialLoad.current) return;
     localStorage.setItem("completedTodos", JSON.stringify(completedTodos));
   }, [completedTodos]);
 
-  // ➕ Add new todo
-  const addTodo = (task) => {
-    setTodos([...todos, task]);
-  }
+  useEffect(() => {
+    isInitialLoad.current = false;
+  }, []);
 
-  // ✅ Mark todo as completed
+  const addTodo = (task) => {
+    setTodos((prev) => [...prev, task]);
+  };
+
   const completeTodo = (index) => {
     const completedTask = todos[index];
-    setCompletedTodos([...completedTodos, completedTask]);
-    setTodos(todos.filter((_, i) => i !== index)); 
-  }
+    setCompletedTodos((prev) => [...prev, completedTask]);
+    setTodos((prev) => prev.filter((_, i) => i !== index));
+  };
 
-  // 🧭 Define routes
   const router = createBrowserRouter([
     { path: '/', element: <><SideManu /><Home todos={todos} completeTodo={completeTodo} /></> },
     { path: '/completed', element: <><SideManu /><Completed completedTodos={completedTodos} /></> },
@@ -58,7 +68,7 @@ function App() {
     <div style={bodyStyle}>
       <RouterProvider router={router} />
     </div>
-  )
+  );
 }
 
 export default App;
