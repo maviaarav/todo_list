@@ -52,6 +52,10 @@ function App() {
     setTodos((prev) => [...prev, task]);
   };
 
+  const deleteTodo = (index) => {
+    setCompletedTodos((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const completeTodo = (index) => {
     const completedTask = todos[index];
     setCompletedTodos((prev) => [...prev, completedTask]);
@@ -60,7 +64,7 @@ function App() {
 
   const router = createBrowserRouter([
     { path: '/', element: <><SideManu /><Home todos={todos} completeTodo={completeTodo} /></> },
-    { path: '/completed', element: <><SideManu /><Completed completedTodos={completedTodos} /></> },
+    { path: '/completed', element: <><SideManu /><Completed completedTodos={completedTodos} deleteTodo={deleteTodo} /></> },
     { path: '/form', element: <><SideManu /><Form addTodo={addTodo} /></> }
   ]);
 

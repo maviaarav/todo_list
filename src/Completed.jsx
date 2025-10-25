@@ -30,8 +30,19 @@ export const taskContainerStyle = {
   margin: "10px auto",
   boxShadow: "0 2px 6px rgba(0,0,0,0.1)"
 };
+const deleteButtonStyle = {
+  padding: "5px 10px",
+  fontSize: "14px",
+  borderRadius: "5px",
+  border: "none",
+  backgroundColor: "#ff4d4d",
+  color: "#fff",
+  cursor: "pointer",
+  alignSelf: "flex-start",
+  display: "block",
+};
 
-const Completed = ({ completedTodos }) => {
+const Completed = ({ completedTodos , deleteTodo }) => {
   return (
     <div style={completedContainerStyle}>
       <div style={styles}>
@@ -42,7 +53,7 @@ const Completed = ({ completedTodos }) => {
       ) : (
         completedTodos.map((todo, index) => (
           <div key={index} style={taskContainerStyle}>
-            <h3>{todo.title}</h3>
+            <h3><button type="button" style={deleteButtonStyle}  onClick={() => deleteTodo(index)}>delete</button>{todo.title}</h3>
             <p>{todo.description}</p>
             <p><strong>Priority:</strong> {todo.priority}</p>
             <p><strong>Due Date:</strong> {todo.dueDate}</p>
