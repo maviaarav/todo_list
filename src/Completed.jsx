@@ -53,6 +53,7 @@ const Completed = ({ completedTodos , deleteTodo }) => {
       ) : (
         completedTodos.map((todo, index) => (
           <div key={index} style={taskContainerStyle}>
+            <h3><button type="button" style={deleteButtonStyle}  onClick={() => deleteTodo(index)}>delete</button>{todo.title}</h3>
             <p>{todo.description}</p>
             <p><strong>Priority:</strong> {todo.priority}</p>
             <p><strong>Due Date:</strong> {todo.dueDate}</p>
