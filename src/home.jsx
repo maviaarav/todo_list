@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
+import playSound from "/Users/Home/todo/Todo_list/src/work_done.mp3";
+import Confetti from 'react-confetti';
+
+
 
 const containerStyle = {
   display: "flex",
@@ -46,11 +50,25 @@ export const taskContainerStyle = {
 };
 
 const Home = ({ todos, completeTodo }) => {
+  const [showConfetti, setShowConfetti] = useState(false);
+      function playSoundEffect() {
+        const audio = new Audio(playSound);
+        audio.play();
+      }
+      const triggerSound = (duration = 15000) =>{
+        setShowConfetti(true);
+        setTimeout(()=>{
+          setShowConfetti(false);
+        }, duration);
+      }
+      
+      
   return (
     <div style={containerStyle}>
-      <div style={styles} className="header">
+      {showConfetti && <Confetti />}
+      <div style={styles}>
         <h2>Today's Task <br />{`You have ${todos.length} tasks`}</h2>
-        <Link to="/form"><button style={buttonStyle} className="new-task-button">+ New Task</button></Link>
+        <Link to="/form"><button style={buttonStyle} id="btn-1" onClick={playSoundEffect}>+ New Task</button></Link>
       </div>
 
       {todos.length === 0 ? (
@@ -77,6 +95,10 @@ const Home = ({ todos, completeTodo }) => {
                   if (e.target.checked) {
                     completeTodo(index);
                   }
+                }}
+                onClick={() =>{
+                  playSoundEffect();
+                  triggerSound();
                 }}
               />
               {todo.title}

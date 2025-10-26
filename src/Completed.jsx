@@ -1,5 +1,12 @@
 import React from "react";
 
+import delete_sound from "/Users/Home/todo/Todo_list/src/delete-button.mp3"
+
+function playDeleteSound(){
+  const audio = new Audio(delete_sound);
+  audio.play();
+}
+
 const completedContainerStyle = {
   display: "flex",
   flexDirection: "column",
@@ -55,7 +62,7 @@ const Completed = ({ completedTodos , deleteTodo }) => {
       ) : (
         completedTodos.map((todo, index) => (
           <div key={index} style={taskContainerStyle}>
-            <h3><button type="button" style={deleteButtonStyle}  onClick={() => deleteTodo(index)}>delete</button>{todo.title}</h3>
+            <h3><button type="button" style={deleteButtonStyle}  onClick={() => { deleteTodo(index); playDeleteSound(); }}>delete</button>{todo.title}</h3>
             <p>{todo.description}</p>
             <p><strong>Priority:</strong> {todo.priority}</p>
             <p><strong>Due Date:</strong> {todo.dueDate}</p>
