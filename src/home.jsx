@@ -35,7 +35,9 @@ const buttonStyle = {
   height: "50px",
   textAlign: "center",
 };
-
+const prioritySymbol = {
+ 
+}
 export const taskContainerStyle = {
   fontSize: "18px",
   width: "90%",
@@ -76,6 +78,15 @@ const Home = ({ todos, completeTodo }) => {
       ) : (
         todos.map((todo, index) => (
           <div key={index} style={taskContainerStyle} className="task-container">
+            <div style={{ width: "25px",
+                height: "25px",
+                borderRadius: "20%",
+                display: "inline-block",
+                marginRight: "10px",
+                backgroundColor: todo.priority === "high" ? "#ff4d6d" : todo.priority === "medium" ? "#e36414" : "#74c69d"
+              }}>
+
+            </div>
             <h3>
               <input 
                 type="checkbox" 
@@ -104,7 +115,7 @@ const Home = ({ todos, completeTodo }) => {
               {todo.title}
             </h3>
             <p>{todo.description}</p>
-            <p><strong>Priority:</strong> {todo.priority}</p>
+            <p><strong>Priority:</strong> {todo.priority}</p> 
             <p><strong>Due Date:</strong> {todo.dueDate}</p>
           </div>
         ))
