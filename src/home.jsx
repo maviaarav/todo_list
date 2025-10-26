@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
-import playSound from "/Users/Home/todo/Todo_list/src/work_done.mp3";
+
 import Confetti from 'react-confetti';
 
 
@@ -52,7 +52,7 @@ export const taskContainerStyle = {
 const Home = ({ todos, completeTodo }) => {
   const [showConfetti, setShowConfetti] = useState(false);
       function playSoundEffect() {
-        const audio = new Audio(playSound);
+        const audio = new Audio("/work_done.mp3");
         audio.play();
       }
       const triggerSound = (duration = 15000) =>{
