@@ -1,6 +1,6 @@
 import React from "react";
 
-import delete_sound from "/Users/Home/todo/Todo_list/src/delete-button.mp3"
+import delete_sound from "/Users/Home/todo/Todo_list/src/save-button.mp3";
 
 function playDeleteSound(){
   const audio = new Audio(delete_sound);
