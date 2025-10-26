@@ -48,9 +48,9 @@ export const taskContainerStyle = {
 const Home = ({ todos, completeTodo }) => {
   return (
     <div style={containerStyle}>
-      <div style={styles}>
+      <div style={styles} className="header">
         <h2>Today's Task <br />{`You have ${todos.length} tasks`}</h2>
-        <Link to="/form"><button style={buttonStyle}>+ New Task</button></Link>
+        <Link to="/form"><button style={buttonStyle} className="new-task-button">+ New Task</button></Link>
       </div>
 
       {todos.length === 0 ? (
