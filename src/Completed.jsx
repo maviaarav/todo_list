@@ -15,7 +15,11 @@ const completedContainerStyle = {
   alignItems: "center",
   overflow: "scroll"
 };
-
+const lineStyle = {
+  textDecoration: "line-through",
+  color: "#262020",
+  fontWeight: "normal"
+}
 const styles = {
   display: "flex",
   fontSize: "32px",
@@ -62,10 +66,10 @@ const Completed = ({ completedTodos , deleteTodo }) => {
       ) : (
         completedTodos.map((todo, index) => (
           <div key={index} style={taskContainerStyle}>
-            <h3><button type="button" style={deleteButtonStyle}  onClick={() => { deleteTodo(index); playDeleteSound(); }}>delete</button>{todo.title}</h3>
-            <p>{todo.description}</p>
-            <p><strong>Priority:</strong> {todo.priority}</p>
-            <p><strong>Due Date:</strong> {todo.dueDate}</p>
+            <h3 style={lineStyle}><button type="button" style={deleteButtonStyle}  onClick={() => { deleteTodo(index); playDeleteSound(); }}>delete</button>{todo.title}</h3>
+            <p style={lineStyle}>{todo.description}</p>
+            <p style={lineStyle}><strong>Priority:</strong> {todo.priority}</p>
+            <p style={lineStyle}><strong>Due Date:</strong> {todo.dueDate}</p>
           </div>
         ))
       )}
