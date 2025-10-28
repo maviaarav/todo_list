@@ -6,6 +6,8 @@ import Confetti from 'react-confetti';
 
 
 
+
+
 const containerStyle = {
   display: "flex",
   flexDirection: "column",
@@ -66,9 +68,9 @@ const Home = ({ todos, completeTodo }) => {
       
       
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} id="container">
       {showConfetti && <Confetti />}
-      <div style={styles}>
+      <div style={styles} id="text-container">
         <h2>Today's Task <br />{`You have ${todos.length} tasks`}</h2>
         <Link to="/form"><button style={buttonStyle} id="btn-1" onClick={playSoundEffect}>+ New Task</button></Link>
       </div>

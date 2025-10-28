@@ -16,3 +16,22 @@ width: 20px;
     position: relative;
     top: 90px;
 }
+
+
+@media screen and (max-width: 1337px) {
+  #btn-1{
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+  }
+  #text-container{
+    font-size: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h2{
+    font-size: 38px;
+  }
+ }

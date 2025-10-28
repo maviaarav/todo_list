@@ -13,6 +13,7 @@ const styles = {
     padding: "20px",
     boxShadow: "2px 0 5px rgba(0,0,0,0.1)",
     fontSize: "20px",
+    textAlign: "center",
 }
 const linkStyle = {
     textDecoration: "none",
@@ -33,8 +34,9 @@ const clicked = (event) => {
 const sideMenu = () => {
     return (
         <>
-            <div style={styles}>
-                <h2 style={{fontSize: "32px", fontWeight: "bold"}}>Task Manager</h2>
+            <div style={styles} id="menu">
+                <button type="sumbit" id="menu-btn">menu</button>
+                <h2 style={{fontSize: "32px", fontWeight: "bold"}}>Task Manager </h2> 
                 <Link to="/" style={linkStyle} onClick={clicked} className="side_menu">All Tasks</Link>
                 <Link to="/completed" style={linkStyle} onClick={clicked} className="side_menu">Completed</Link>
             </div>

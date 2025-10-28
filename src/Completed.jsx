@@ -1,4 +1,4 @@
-import React from "react";
+
 
 
 
@@ -56,21 +56,26 @@ const deleteButtonStyle = {
 };
 
 const Completed = ({ completedTodos , deleteTodo }) => {
+  const safeTodos = Array.isArray(completedTodos) ? completedTodos : [];
+  const nonNullCount = safeTodos.filter((t) => t != null).length; 
+
   return (
     <div style={completedContainerStyle}>
       <div style={styles}>
-        <h2>Completed Todos <br />{`You have completed ${completedTodos.length} tasks`}</h2>
+        <h2>Completed Todos <br />{`You have completed ${nonNullCount} tasks`}</h2>
       </div>
-      {completedTodos.length === 0 ? (
+      {nonNullCount === 0 ? (
         <p style={{ fontSize: "18px", color: "#666" }}>No completed tasks yet.</p>
       ) : (
-        completedTodos.map((todo, index) => (
-          <div key={index} style={taskContainerStyle}>
-            <h3 style={lineStyle}><button type="button" style={deleteButtonStyle}  onClick={() => { deleteTodo(index); playDeleteSound(); }}>delete</button>{todo.title}</h3>
-            <p style={lineStyle}>{todo.description}</p>
-            <p style={lineStyle}><strong>Priority:</strong> {todo.priority}</p>
-            <p style={lineStyle}><strong>Due Date:</strong> {todo.dueDate}</p>
-          </div>
+        safeTodos.map((todo, index) => (
+          todo ? (
+            <div key={index} style={taskContainerStyle}>
+              <h3 style={lineStyle}><button type="button" style={deleteButtonStyle}  onClick={() => { deleteTodo(index); playDeleteSound(); }}>delete</button>{todo.title}</h3>
+              <p style={lineStyle}>{todo.description}</p>
+              <p style={lineStyle}><strong>Priority:</strong> {todo.priority}</p>
+              <p style={lineStyle}><strong>Due Date:</strong> {todo.dueDate}</p>
+            </div>
+          ) : null
         ))
       )}
     </div>
