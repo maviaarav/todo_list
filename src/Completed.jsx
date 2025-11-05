@@ -52,7 +52,7 @@ const deleteButtonStyle = {
   float: "right",
   display: "block",
   position: "relative",
-  top: "90px",
+  top: "0",
 };
 
 const Completed = ({ completedTodos , deleteTodo }) => {
