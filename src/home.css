@@ -17,7 +17,21 @@ width: 20px;
     top: 90px;
 }
 
+.btn-closed{
+      margin: 20px;
+        cursor: pointer;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #35e188;
+        color: #222B45;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        display: none;
+        position: absolute;
+        left: 0;
 
+}
 @media screen and (max-width: 1337px) {
   #btn-1{
     position: absolute;
@@ -33,5 +47,7 @@ width: 20px;
   }
   h2{
     font-size: 38px;
+    margin-top: 15px;
   }
+
  }

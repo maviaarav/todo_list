@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
-
+import sideMenu from "./side-menu.jsx";
 import Confetti from 'react-confetti';
 
 
@@ -24,6 +24,7 @@ const styles = {
   width: "100%",
   padding: "40px",
   justifyContent: "space-between",
+  marginTop: "10px",
 };
 
 const buttonStyle = {
@@ -37,8 +38,13 @@ const buttonStyle = {
   height: "50px",
   textAlign: "center",
 };
-const prioritySymbol = {
- 
+const ClosedStyle = {
+    /* margin-top: 20px; */
+    margin: "20px",
+    display: "flex",
+    /* float: left; */
+    position: "absolute",
+    left: 0
 }
 export const taskContainerStyle = {
   fontSize: "18px",
@@ -66,9 +72,23 @@ const Home = ({ todos, completeTodo }) => {
         }, duration);
       }
       
-      
+function openMenu() {
+    const menu = document.getElementById('menu');
+    const closedButton = document.querySelector('.btn-closed');
+    menu.style.display = "flex"
+
+    if (menu.style.display === "flex") {
+       console.log("menu is open");
+       closedButton.style.display = "none";
+    }
+    
+}
   return (
     <div style={containerStyle} id="container">
+      <div>
+        <button className="btn-closed" onClick={openMenu}>Menu</button>
+      </div>
+      
       {showConfetti && <Confetti />}
       <div style={styles} id="text-container">
         <h2>Today's Task <br />{`You have ${todos.length} tasks`}</h2>
@@ -125,5 +145,7 @@ const Home = ({ todos, completeTodo }) => {
     </div>
   );
 };
+
+
 
 export default Home;

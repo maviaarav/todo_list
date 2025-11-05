@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './side-menu.css';
+import Home  from "./home.jsx";
 
 const styles = {
     width : "300px",
@@ -30,17 +31,34 @@ const clicked = (event) => {
     })
     event.currentTarget.classList.add("active");
 }
+function handleMenuToggle() {
+    const menu = document.getElementById('menu');
+    const closedButton = document.querySelector('.btn-closed');
+    menu.style.display = "none"
+
+    if (menu.style.display === "none") {
+       console.log("menu is closed");
+       closedButton.style.display = "flex";
+       
+    }
+    else {
+        console.log("menu is open");
+        closedButton.style.display = "none";
+    }
+
+}
 
 const sideMenu = () => {
     return (
         <>
             <div style={styles} id="menu">
-                <button type="sumbit" id="menu-btn">menu</button>
+                <button type="sumbit" id="menu-btn" onClick={handleMenuToggle}>Close</button>
                 <h2 style={{fontSize: "32px", fontWeight: "bold"}}>Task Manager </h2> 
                 <Link to="/" style={linkStyle} onClick={clicked} className="side_menu">All Tasks</Link>
                 <Link to="/completed" style={linkStyle} onClick={clicked} className="side_menu">Completed</Link>
             </div>
         </>
+
     )
 }
 export default sideMenu;

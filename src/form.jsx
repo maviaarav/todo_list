@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { taskContainerStyle } from './home.jsx'
-
+import './form.css';
 
 
 
@@ -18,12 +18,9 @@ const styles ={
     fontSize: "15px",
     border: "1px solid grey",
     margin: '20px 0 20px 0',
-    width: "50%",
-    
-    
+
 }
 const select_style={
-    width: "50%",
     padding: "15px",
     borderRadius: "15px",
     fontSize: "15px",
@@ -57,11 +54,11 @@ const Form = ({addTodo}) =>{
                 <h2>Create New Task</h2>
                 <p style={{fontSize: "18px", color: "#6B7280"}}>Fill in the details below to add a new task to your list.</p>
             </div>
-            <div style={{fontSize: "18px", width:"80%",padding: "40px", color: "#374151",gap: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between" , marginLeft: "20px;"}}>
+            <div id="task-container">
                 <p >Task Title *</p>
-                <input style={styles} type="text" value={title} placeholder="e.g., Design the new dashboard" onChange={(e)=>setTitle(e.target.value)} required/>
+                <input style={styles} type="text" className="form-input" value={title} placeholder="e.g., Design the new dashboard" onChange={(e)=>setTitle(e.target.value)} required/>
                 <p >Task Description *</p>
-                <input style={styles} value={description} placeholder="Add a more detailed description of the task..." onChange={(e)=>setDescription(e.target.value)} required></input>
+                <input style={styles} className="form-input" value={description} placeholder="Add a more detailed description of the task..." onChange={(e)=>setDescription(e.target.value)} required></input>
                 <div>
                     <div className="form-group">
                         <label className="form-label">Priority *</label> <br />
@@ -73,15 +70,15 @@ const Form = ({addTodo}) =>{
                     </div>
 
                     <div className="form-group">
-                        <label style= {select_style}className="form-label">Due Date</label> <br />
+                        <label style= {select_style} className="form-label">Due Date</label> <br />
                         <input style={styles} type="date" className="form-input" value={dueDate} onChange={(e)=>setDueDate(e.target.value)}/>
                     </div>
                     </div>
                     <div>
 
-                       <Link to="/"><button style={{width: "140px", backgroundColor: !title || !description || !priority ? '#E5E7EB' : '#3B82F6', marginInline:"20px", cursor: !title || !description || !priority ? 'not-allowed' : 'pointer'}} className="btn-1" onClick={()=>{playSavebutton(); handleSave();}} disabled={!title || !description || !priority }>Save task</button></Link>
+                       <Link to="/"><button style={{ backgroundColor: !title || !description || !priority ? '#E5E7EB' : '#3B82F6', cursor: !title || !description || !priority ? 'not-allowed' : 'pointer'}} className="btn-1" onClick={()=>{playSavebutton(); handleSave();}} disabled={!title || !description || !priority }>Save task</button></Link>
 
-                        <Link to="/"><button style={{width: "140px", backgroundColor:"#F3F4F6", color:"#374151", border:"1px solid lightgrey"}}>Cancel</button></Link>
+                        <Link to="/"><button style={{ backgroundColor:"#F3F4F6", color:"#374151", border:"1px solid lightgrey"}} className="btn-1">Cancel</button></Link>
                     </div>
                     
             </div>
