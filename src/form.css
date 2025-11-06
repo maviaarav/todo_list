@@ -8,6 +8,7 @@
 .btn-1{
   width: 140px; 
   margin-inline: 20px;
+  color: black;
 }
 #container{
   align-items: baseline;
@@ -34,10 +35,11 @@
     width: 130%;
     margin-inline: 0;
     margin-top: 20px;
+    color: black;
   }
   h2{
     text-align: center;
-  }x₹x₹x₹
+  }
   p{
     text-align: center;
   }
