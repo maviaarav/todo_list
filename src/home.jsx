@@ -7,7 +7,6 @@ import Confetti from 'react-confetti';
 
 
 
-
 const containerStyle = {
   display: "flex",
   flexDirection: "column",
@@ -83,6 +82,11 @@ function openMenu() {
     }
     
 }
+
+// const handleEdit = (id) => {
+//     const dt = todos.filter((item) => item.id === id);
+//     console.log(dt);
+// }
   return (
     <div style={containerStyle} id="container">
       <div>
@@ -110,16 +114,11 @@ function openMenu() {
 
             </div>
             <h3>
-              <input 
-                type="checkbox" 
-                className="checkBox" 
-                role="switch"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    completeTodo(index);
-                  }
-                }}
-              />
+              
+             <Link to="/form" state={{ todo, index }}>
+ <button className="button">Edit</button>
+
+</Link>
               <input 
                 type="checkbox" 
                 className="checkBox" 

@@ -48,9 +48,17 @@ function App() {
     isInitialLoad.current = false;
   }, []);
 
-  const addTodo = (task) => {
-    setTodos((prev) => [...prev, task]);
-  };
+const addTodo = (task, index = null) => {
+  setTodos((prev) => {
+    if (index !== null) {
+      const updated = [...prev];
+      updated[index] = task;
+      return updated;
+    }
+    return [...prev, task];
+  });
+};
+
 
   const deleteTodo = (index) => {
     setCompletedTodos((prev) => prev.filter((_, i) => i !== index));

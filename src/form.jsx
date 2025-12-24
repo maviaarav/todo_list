@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { taskContainerStyle } from './home.jsx'
 import './form.css';
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 
@@ -33,21 +34,39 @@ const two_element = {
 
 
 const Form = ({addTodo}) =>{
-   const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [priority, setPriority] = useState("medium");
-    const [dueDate, setDueDate] = useState("");
+    const location = useLocation();
+const navigate = useNavigate();
 
- const handleSave = () => {
-        if(!title.trim()) return; 
-        if(!description.trim()) return;
-        const newTask = { title, description, priority, dueDate };   
-        addTodo(newTask); 
-    }
+const editingTodo = location.state?.todo;
+const editingIndex = location.state?.index;
+
+const isEditMode = Boolean(editingTodo);
+  const [title, setTitle] = useState(editingTodo?.title || "");
+const [description, setDescription] = useState(editingTodo?.description || "");
+const [priority, setPriority] = useState(editingTodo?.priority || "medium");
+const [dueDate, setDueDate] = useState(editingTodo?.dueDate || "");
+
+
+const handleSave = () => {
+  if (!title.trim() || !description.trim()) return;
+
+  const taskData = { title, description, priority, dueDate };
+
+  if (isEditMode) {
+    addTodo(taskData, editingIndex); // update existing
+  } else {
+    addTodo(taskData); // create new
+  }
+
+  navigate("/");
+};
+
     function playSavebutton(){
     const audio = new Audio('/save-button.mp3');
     audio.play();
 }
+
+
     return (
         <div style={containerStyle}>
             <div style={{fontSize: "32px", width: "100%", padding: "40px", gap: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between" }} > 
@@ -76,7 +95,21 @@ const Form = ({addTodo}) =>{
                     </div>
                     <div>
 
-                       <Link to="/"><button style={{ backgroundColor: !title || !description || !priority ? '#E5E7EB' : '#3B82F6', cursor: !title || !description || !priority ? 'not-allowed' : 'pointer'}} className="btn-1" onClick={()=>{playSavebutton(); handleSave();}} disabled={!title || !description || !priority }>Save task</button></Link>
+                       <Link to="/"><button
+  className="btn-1"
+  onClick={() => {
+    playSavebutton();
+    handleSave();
+  }}
+  style={{
+    backgroundColor: !title || !description ? "#E5E7EB" : "#3B82F6",
+    cursor: !title || !description ? "not-allowed" : "pointer"
+  }}
+  disabled={!title || !description}
+>
+  {isEditMode ? "Update Task" : "Save Task"}
+</button>
+</Link>
 
                         <Link to="/"><button style={{ backgroundColor:"#F3F4F6", color:"#374151", border:"1px solid lightgrey"}} className="btn-1">Cancel</button></Link>
                     </div>
